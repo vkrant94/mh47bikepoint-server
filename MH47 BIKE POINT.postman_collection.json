@@ -1,0 +1,798 @@
+{
+	"info": {
+		"_postman_id": "f3fb833f-8725-43e7-bda3-622a54fa7236",
+		"name": "MH47 BIKE POINT",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "TOWING VAN",
+			"item": [
+				{
+					"name": "Towing Vans",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/towingVans",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"towingVans"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Towing Van",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/towingVans/0e84a8d1-2d03-4da6-91c8-847efe5689e9",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"towingVans",
+								"0e84a8d1-2d03-4da6-91c8-847efe5689e9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Towing Van",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"van_name\":\"Piaggio APE\",\r\n  \"driver_name\": \"Vikrant Parab\",\r\n  \"van_number\": \"MH05DA2313\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_url}}/towingVans",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"towingVans"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Towing Van",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"van_name\":\"Piaggio APE\",\r\n  \"driver_name\": \"Vikrant Vijay Parab\",\r\n  \"van_number\": \"MH05DA2314\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_url}}/towingVans/2ebaaf26-cb62-4896-b559-833802c39edf",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"towingVans",
+								"2ebaaf26-cb62-4896-b559-833802c39edf"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Towing Van",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/towingVans/2ebaaf26-cb62-4896-b559-833802c39edf",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"towingVans",
+								"2ebaaf26-cb62-4896-b559-833802c39edf"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "CUSTOMER",
+			"item": [
+				{
+					"name": "Customers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/customers",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"customers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Customer",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/customers/88e0989f-b0a3-447b-8e80-e4339ded68a1",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"customers",
+								"88e0989f-b0a3-447b-8e80-e4339ded68a1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Customer",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"first_name\":\"Vikrant\",\r\n  \"last_name\": \"Parab\",\r\n  \"phone\": \"9819349383\",\r\n  \"email\":\"vkrant@gmail.com\",\r\n  \"address_line1\":\"Tisgaon\",\r\n  \"address_line2\":\"Kalyan\",\r\n  \"city\": \"Thane\",\r\n  \"state\": \"Maharashtra\",\r\n  \"zip_code\": \"421306\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_url}}/customers",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"customers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Customer",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"first_name\":\"Vikrant Vijay\",\r\n  \"last_name\": \"Parab\",\r\n  \"phone\": \"9819349323\",\r\n  \"email\":\"vkrantparab@gmail.com\",\r\n  \"address_line1\":\"Tisgaon Naka\",\r\n  \"address_line2\":\"Kalyan\",\r\n  \"city\": \"Thane\",\r\n  \"state\": \"Maharashtra\",\r\n  \"zip_code\": \"421306\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_url}}/customers/88e0989f-b0a3-447b-8e80-e4339ded68a1",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"customers",
+								"88e0989f-b0a3-447b-8e80-e4339ded68a1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Customer",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/customers/88e0989f-b0a3-447b-8e80-e4339ded68a1",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"customers",
+								"88e0989f-b0a3-447b-8e80-e4339ded68a1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "STORE",
+			"item": [
+				{
+					"name": "Stores",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/stores",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"stores"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Store",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/stores/88e0989f-b0a3-447b-8e80-e4339ded68a1",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"stores",
+								"88e0989f-b0a3-447b-8e80-e4339ded68a1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Store",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"store_name\":\"MH-47\",\r\n  \"phone\": \"9819349383\",\r\n  \"email\":\"MH47@gmail.com\",\r\n  \"address_line1\":\"Tisgaon\",\r\n  \"address_line2\":\"Kalyan\",\r\n  \"city\": \"Thane\",\r\n  \"state\": \"MH\",\r\n  \"zip_code\": \"421306\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_url}}/stores",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"stores"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Store",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"store_name\":\"MH-47\",\r\n  \"phone\": \"9819349383\",\r\n  \"email\":\"MH47@gmail.com\",\r\n  \"address_line1\":\"Tisgaon\",\r\n  \"address_line2\":\"Kalyan\",\r\n  \"city\": \"Thane\",\r\n  \"state\": \"MH\",\r\n  \"zip_code\": \"421306\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_url}}/stores/6c78d5e5-0312-4c62-bf7a-a56b52c2c799",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"stores",
+								"6c78d5e5-0312-4c62-bf7a-a56b52c2c799"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Store",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/stores/6c78d5e5-0312-4c62-bf7a-a56b52c2c799",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"stores",
+								"6c78d5e5-0312-4c62-bf7a-a56b52c2c799"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "GARAGE",
+			"item": [
+				{
+					"name": "Garages",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/garages",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"garages"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Garage",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/garages/19a87dea-7c0f-41e1-a7f8-4c2d589d11c5",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"garages",
+								"19a87dea-7c0f-41e1-a7f8-4c2d589d11c5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Garage",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"garage_name\":\"MH-47\",\r\n  \"phone\": \"9819349383\",\r\n  \"email\":\"MH47@gmail.com\",\r\n  \"address_line1\":\"Tisgaon\",\r\n  \"address_line2\":\"Kalyan\",\r\n  \"city\": \"Thane\",\r\n  \"state\": \"Maharashtra\",\r\n  \"zip_code\": \"421306\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_url}}/garages",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"garages"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Garage",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"garage_name\":\"MH-47\",\r\n  \"phone\": \"9819349111\",\r\n  \"email\":\"MH47@gmail.com\",\r\n  \"address_line1\":\"Tisgaon\",\r\n  \"address_line2\":\"Kalyan\",\r\n  \"city\": \"Thane\",\r\n  \"state\": \"Maharashtra\",\r\n  \"zip_code\": \"421306\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_url}}/garages/19a87dea-7c0f-41e1-a7f8-4c2d589d11c5",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"garages",
+								"19a87dea-7c0f-41e1-a7f8-4c2d589d11c5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Garage",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/garages/19a87dea-7c0f-41e1-a7f8-4c2d589d11c5",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"garages",
+								"19a87dea-7c0f-41e1-a7f8-4c2d589d11c5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "STAFF",
+			"item": [
+				{
+					"name": "Staffs",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/staffs",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"staffs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Staff",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/staffs/19a87dea-7c0f-41e1-a7f8-4c2d589d11c5",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"staffs",
+								"19a87dea-7c0f-41e1-a7f8-4c2d589d11c5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Staff",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"first_name\":\"Vikrant\",\r\n    \"last_name\": \"Parab\",\r\n    \"phone\": \"9819349383\",\r\n    \"email\":\"MH47@gmail.com\",\r\n    \"address_line1\":\"Tisgaon\",\r\n    \"address_line2\":\"Kalyan\",\r\n    \"city\": \"Thane\",\r\n    \"state\": \"Maharashtra\",\r\n    \"zip_code\": \"421306\",\r\n    \"active\":\"1\",\r\n    \"store_id\":\"\",\r\n    \"manager_id\":\"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_url}}/staffs",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"staffs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"first_name\":\"Vikrant\",\r\n    \"last_name\": \"Parab\",\r\n    \"phone\": \"9819349383\",\r\n    \"email\":\"MH47@gmail.com\",\r\n    \"address_line1\":\"Tisgaon\",\r\n    \"address_line2\":\"Kalyan\",\r\n    \"city\": \"Thane\",\r\n    \"state\": \"Maharashtra\",\r\n    \"zip_code\": \"421306\",\r\n    \"active\":\"1\",\r\n    \"store_id\":\"\",\r\n    \"manager_id\":\"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_url}}/staffs/19a87dea-7c0f-41e1-a7f8-4c2d589d11c5",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"staffs",
+								"19a87dea-7c0f-41e1-a7f8-4c2d589d11c5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/staffs/19a87dea-7c0f-41e1-a7f8-4c2d589d11c5",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"staffs",
+								"19a87dea-7c0f-41e1-a7f8-4c2d589d11c5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PRODUCT",
+			"item": [
+				{
+					"name": "Products",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/products",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Product",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/products/19a87dea-7c0f-41e1-a7f8-4c2d589d11c5",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"products",
+								"19a87dea-7c0f-41e1-a7f8-4c2d589d11c5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Product",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/products",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Product",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/products/19a87dea-7c0f-41e1-a7f8-4c2d589d11c5",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"products",
+								"19a87dea-7c0f-41e1-a7f8-4c2d589d11c5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Product",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/products/19a87dea-7c0f-41e1-a7f8-4c2d589d11c5",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"products",
+								"19a87dea-7c0f-41e1-a7f8-4c2d589d11c5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "TRANSACTION",
+			"item": [
+				{
+					"name": "Transactions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/transactions",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"transactions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Transaction",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/transactions/19a87dea-7c0f-41e1-a7f8-4c2d589d11c5",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"transactions",
+								"19a87dea-7c0f-41e1-a7f8-4c2d589d11c5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Transaction",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/transactions/19a87dea-7c0f-41e1-a7f8-4c2d589d11c5",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"transactions",
+								"19a87dea-7c0f-41e1-a7f8-4c2d589d11c5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Transaction",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/transactions/19a87dea-7c0f-41e1-a7f8-4c2d589d11c5",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"transactions",
+								"19a87dea-7c0f-41e1-a7f8-4c2d589d11c5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Transaction",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/transactions/19a87dea-7c0f-41e1-a7f8-4c2d589d11c5",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"transactions",
+								"19a87dea-7c0f-41e1-a7f8-4c2d589d11c5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Get Defaults",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{api_url}}/defaults",
+					"host": [
+						"{{api_url}}"
+					],
+					"path": [
+						"defaults"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "api_url",
+			"value": "http://localhost:3000"
+		},
+		{
+			"key": "staging",
+			"value": null
+		}
+	]
+}
