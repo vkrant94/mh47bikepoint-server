@@ -1,5 +1,16 @@
 const express = require("express");
 const app = express();
+var cors = require("cors");
+const multer = require("multer");
+const fileUpload = multer();
+const cloudinary = require("cloudinary").v2;
+cloudinary.config({
+  cloud_name: "mh47bikepoint",
+  api_key: "235334794225731",
+  api_secret: "nn4LkyPqj5mMlIRXN5PT2UKTAcI",
+});
+const streamifier = require("streamifier");
+
 const transactionService = require("./services/transactionService");
 const towingService = require("./services/towingVanService");
 const defaultsService = require("./services/defaultsService");
@@ -11,6 +22,7 @@ const productService = require("./services/productService");
 const portNumber = 3000;
 
 app.use(express.json()); // req.body
+app.use(cors()); // CORS
 
 // ROUTES
 
@@ -66,6 +78,30 @@ app.get("/defaults", async (req, res) => {
   } catch (err) {
     res.json({ error: err.message });
   }
+});
+
+app.post("/upload", fileUpload.single("image"), function (req, res, next) {
+  let streamUpload = (req) => {
+    return new Promise((resolve, reject) => {
+      let stream = cloudinary.uploader.upload_stream((error, result) => {
+        if (result) {
+          resolve(result);
+        } else {
+          reject(error);
+        }
+      });
+
+      streamifier.createReadStream(req.file.buffer).pipe(stream);
+    });
+  };
+
+  async function upload(req) {
+    let result = await streamUpload(req);
+    console.log(result);
+    res.json(result);
+  }
+
+  upload(req);
 });
 //#endregion
 

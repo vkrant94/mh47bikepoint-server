@@ -33,7 +33,8 @@ CREATE TABLE sales.customers (
 	address_line2 VARCHAR (512),
 	city VARCHAR (50),
 	state VARCHAR (32),
-	zip_code VARCHAR (7)
+	zip_code VARCHAR (7),
+	thumnail_url VARCHAR (700)
 );
 
 CREATE TABLE sales.stores (
@@ -73,6 +74,7 @@ CREATE TABLE sales.staffs (
 	active int NOT NULL,
 	store_id UUID NOT NULL,
 	manager_id UUID DEFAULT UUID_GENERATE_V4()::UUID,
+	thumnail_url VARCHAR (700),
 	FOREIGN KEY (store_id) REFERENCES sales.stores (store_id) ON DELETE CASCADE ON UPDATE CASCADE,
 	FOREIGN KEY (manager_id) REFERENCES sales.staffs (staff_id) ON DELETE NO ACTION ON UPDATE NO ACTION
 );
