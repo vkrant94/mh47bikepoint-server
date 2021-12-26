@@ -80,6 +80,25 @@ app.get("/defaults", async (req, res) => {
   }
 });
 
+app.get("/staffs/defaults", async (req, res) => {
+  try {
+    const stores = (await storeService.getStores()).map((s) => {
+      return { store_id: s.store_id, store_name: s.store_name };
+    });
+    const managers = (await staffService.getStaffs())
+      .filter((s) => s.designation === "Manager")
+      .map((s) => {
+        return {
+          manager_id: s.staff_id,
+          manager_name: `${s.first_name} ${s.last_name}`,
+        };
+      });
+    res.json({ stores, managers });
+  } catch (err) {
+    res.json({ error: err.message });
+  }
+});
+
 app.post("/upload", fileUpload.single("image"), function (req, res, next) {
   let streamUpload = (req) => {
     return new Promise((resolve, reject) => {
@@ -288,7 +307,23 @@ app.delete("/garages/:id", async (req, res) => {
 //#region STAFF
 app.get("/staffs", async (req, res) => {
   try {
-    res.json(await staffService.getStaffs());
+    const stores = await storeService.getStores();
+    const staffs = await staffService.getStaffs();
+
+    // store_name
+    res.json(
+      staffs.map((s) => {
+        const store = stores.find((st) => st.store_id === s.store_id);
+        const manager = staffs.find((st) => st.staff_id === s.manager_id);
+        return {
+          ...s,
+          store_name: store ? store.store_name : "",
+          manager_name: manager
+            ? `${manager.first_name} ${manager.last_name}`
+            : "",
+        };
+      })
+    );
   } catch (err) {
     res.json({ error: err.message });
   }
