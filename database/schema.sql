@@ -73,6 +73,7 @@ CREATE TABLE sales.staffs (
 	state VARCHAR (32),
 	active int NOT NULL,
 	store_id UUID NOT NULL,
+	designation VARCHAR(50) NOT NULL,
 	manager_id UUID DEFAULT UUID_GENERATE_V4()::UUID,
 	thumnail_url VARCHAR (700),
 	FOREIGN KEY (store_id) REFERENCES sales.stores (store_id) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -95,6 +96,7 @@ CREATE TABLE production.products (
 	insuarance_company VARCHAR (100) NOT NULL,
 	insuarance_expiry DATE,
 	puc_expiry DATE NOT NULL,
+	thumnail_url VARCHAR (700),
 	FOREIGN KEY (category_id) REFERENCES production.bike_categories (category_id) ON DELETE CASCADE ON UPDATE CASCADE,
 	FOREIGN KEY (brand_id) REFERENCES production.brands (brand_id) ON DELETE CASCADE ON UPDATE CASCADE,
 	FOREIGN KEY (owner_id) REFERENCES sales.customers (customer_id) ON DELETE CASCADE ON UPDATE CASCADE
