@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "f3fb833f-8725-43e7-bda3-622a54fa7236",
+		"_postman_id": "a8e40e9f-a4f9-4696-b2bb-f907c0ca22ae",
 		"name": "MH47 BIKE POINT",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -758,6 +758,42 @@
 						"{{api_url}}"
 					],
 					"path": [
+						"defaults"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Staff Defaults",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{api_url}}/staffs/defaults",
+					"host": [
+						"{{api_url}}"
+					],
+					"path": [
+						"staffs",
+						"defaults"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Product Defaults",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{api_url}}/products/defaults",
+					"host": [
+						"{{api_url}}"
+					],
+					"path": [
+						"products",
 						"defaults"
 					]
 				}

@@ -99,6 +99,21 @@ app.get("/staffs/defaults", async (req, res) => {
   }
 });
 
+app.get("/products/defaults", async (req, res) => {
+  try {
+    const { bikeCategories, brands } = await defaultsService.getDefaults();
+    const customers = (await customerService.getCustomers()).map((s) => {
+      return {
+        customer_id: s.customer_id,
+        customer_name: `${s.first_name} ${s.last_name}`,
+      };
+    });
+    res.json({ bikeCategories, brands, customers });
+  } catch (err) {
+    res.json({ error: err.message });
+  }
+});
+
 app.post("/upload", fileUpload.single("image"), function (req, res, next) {
   let streamUpload = (req) => {
     return new Promise((resolve, reject) => {
