@@ -5,7 +5,17 @@ CREATE SCHEMA production;
 
 CREATE SCHEMA sales;
 
+CREATE SCHEMA graphics;
+
 -- create tables
+CREATE TABLE graphics.settings (
+	setting_id UUID DEFAULT UUID_GENERATE_V4()::UUID PRIMARY KEY,
+	profile_name VARCHAR (255) NOT NULL,
+	visitor_pie1_color varchar (32) NOT NULL,
+	visitor_pie2_color varchar (32) NOT NULL,
+	visitor_pie3_color varchar (32) NOT NULL
+);
+
 CREATE TABLE production.bike_categories (
 	category_id UUID DEFAULT UUID_GENERATE_V4()::UUID PRIMARY KEY,
 	category_name VARCHAR (255) NOT NULL
