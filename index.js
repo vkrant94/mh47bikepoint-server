@@ -383,7 +383,28 @@ app.delete("/staffs/:id", async (req, res) => {
 //#region PRODUCT
 app.get("/products", async (req, res) => {
   try {
-    res.json(await productService.getProducts());
+    const { bikeCategories, brands } = await defaultsService.getDefaults();
+    const customers = await customerService.getCustomers();
+    const products = await productService.getProducts();
+
+    res.json(
+      products.map((p) => {
+        const category = bikeCategories.find(
+          (b) => b.category_id === p.category_id
+        );
+        const brand = brands.find((b) => b.brand_id === p.brand_id);
+        const customer = customers.find((c) => p.owner_id === c.customer_id);
+
+        return {
+          ...p,
+          brand_name: brand ? brand.brand_name : "",
+          category_name: category ? category.category_name : "",
+          owner_name: customer
+            ? `${customer.first_name} ${customer.last_name}`
+            : "",
+        };
+      })
+    );
   } catch (err) {
     res.json({ error: err.message });
   }
