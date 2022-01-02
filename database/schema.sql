@@ -47,6 +47,20 @@ CREATE TABLE sales.customers (
 	thumnail_url VARCHAR (700)
 );
 
+CREATE TABLE sales.stakeholders (
+	stakeholder_id UUID DEFAULT UUID_GENERATE_V4()::UUID PRIMARY KEY,
+	stakeholder_name VARCHAR (255) NOT NULL,
+	type VARCHAR (50) NOT NULL,		--dealer/RTO Agent
+	phone VARCHAR (25),
+	email VARCHAR (255) NOT NULL,
+	address_line1 VARCHAR (512),
+	address_line2 VARCHAR (512),
+	city VARCHAR (50),
+	state VARCHAR (32),
+	zip_code VARCHAR (7),
+	thumnail_url VARCHAR (700)
+);
+
 CREATE TABLE sales.stores (
 	store_id UUID DEFAULT UUID_GENERATE_V4()::UUID PRIMARY KEY,
 	store_name VARCHAR (255) NOT NULL,
@@ -123,14 +137,25 @@ CREATE TABLE sales.transactions (
 	store_id UUID NOT NULL,
 	staff_id UUID,
 	invoice_number VARCHAR (25),
-	cost DECIMAL (10, 2) NOT NULL,
+	trans_amount DECIMAL (15, 2) NOT NULL,
+	paid_amount DECIMAL (15, 2) NOT NULL,
 	garage_id UUID,
 	van_id UUID,
 	payment_mode VARCHAR (25),
+	financer VARCHAR (50),
+	down_payment DECIMAL (15, 2) NOT NULL,
+	loan_amount DECIMAL (15, 2) NOT NULL,
+	stakeholder_id UUID,
+	paper_handover_date DATE,
+	rto_paper_recv_date DATE,
+	rto_reciept_recv int NOT NULL,
+	drc_pending int NOT NULL,
+	hp_pending int NOT NULL,
 	FOREIGN KEY (customer_id) REFERENCES sales.customers (customer_id) ON DELETE CASCADE ON UPDATE CASCADE,
 	FOREIGN KEY (product_id) REFERENCES production.products (product_id) ON DELETE CASCADE ON UPDATE CASCADE,
 	FOREIGN KEY (store_id) REFERENCES sales.stores (store_id) ON DELETE CASCADE ON UPDATE CASCADE,
 	FOREIGN KEY (staff_id) REFERENCES sales.staffs (staff_id) ON DELETE NO ACTION ON UPDATE NO ACTION,
 	FOREIGN KEY (garage_id) REFERENCES production.garage (garage_id) ON DELETE CASCADE ON UPDATE CASCADE,
-	FOREIGN KEY (van_id) REFERENCES production.towing_vans (van_id) ON DELETE CASCADE ON UPDATE CASCADE
+	FOREIGN KEY (van_id) REFERENCES production.towing_vans (van_id) ON DELETE CASCADE ON UPDATE CASCADE,
+	FOREIGN KEY (stakeholder_id) REFERENCES sales.stakeholders (stakeholder_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
