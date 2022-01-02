@@ -135,7 +135,7 @@ app.get("/defaults/transactions", async (req, res) => {
     const productsLite = products.map((p) => {
       return {
         product_id: p.product_id,
-        product_name: p.product_name,
+        product_name: `${p.product_name} | ${p.vehicle_number}`,
       };
     });
 

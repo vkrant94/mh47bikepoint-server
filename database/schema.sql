@@ -130,7 +130,7 @@ CREATE TABLE sales.transactions (
 	transaction_id UUID DEFAULT UUID_GENERATE_V4()::UUID PRIMARY KEY,
 	customer_id UUID,
 	product_id UUID NOT NULL,
-	transaction_status int NOT NULL,
+	transaction_status VARCHAR(50) NOT NULL,
 	transaction_type VARCHAR (25),
 	start_date VARCHAR (40) NOT NULL,
 	end_date VARCHAR (40),
