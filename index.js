@@ -15,6 +15,7 @@ const transactionService = require("./services/transactionService");
 const towingService = require("./services/towingVanService");
 const defaultsService = require("./services/defaultsService");
 const customerService = require("./services/customerService");
+const stakeholderService = require("./services/stakeholderService");
 const storeService = require("./services/storeService");
 const garageService = require("./services/garageService");
 const staffService = require("./services/staffService");
@@ -80,7 +81,7 @@ app.get("/defaults", async (req, res) => {
   }
 });
 
-app.get("/staffs/defaults", async (req, res) => {
+app.get("/defaults/staffs", async (req, res) => {
   try {
     const stores = (await storeService.getStores()).map((s) => {
       return { store_id: s.store_id, store_name: s.store_name };
@@ -99,7 +100,7 @@ app.get("/staffs/defaults", async (req, res) => {
   }
 });
 
-app.get("/products/defaults", async (req, res) => {
+app.get("/defaults/products", async (req, res) => {
   try {
     const { bikeCategories, brands } = await defaultsService.getDefaults();
     const customers = (await customerService.getCustomers()).map((s) => {
@@ -111,6 +112,78 @@ app.get("/products/defaults", async (req, res) => {
     res.json({ bikeCategories, brands, customers });
   } catch (err) {
     res.json({ error: err.message });
+  }
+});
+
+app.get("/defaults/transactions", async (req, res) => {
+  try {
+    const customers = await customerService.getCustomers();
+    const products = await productService.getProducts();
+    const stores = await storeService.getStores();
+    const staffs = await staffService.getStaffs();
+    const garages = await garageService.getGarages();
+    const vans = await towingService.getTowingVans();
+    const stakeholders = await stakeholderService.getStakeholders();
+
+    const customersLite = customers.map((s) => {
+      return {
+        customer_id: s.customer_id,
+        customer_name: `${s.first_name} ${s.last_name}`,
+      };
+    });
+
+    const productsLite = products.map((p) => {
+      return {
+        product_id: p.product_id,
+        product_name: p.product_name,
+      };
+    });
+
+    const storesLite = stores.map((p) => {
+      return {
+        store_id: p.store_id,
+        store_name: p.store_name,
+      };
+    });
+
+    const staffsLite = staffs.map((p) => {
+      return {
+        staff_id: p.staff_id,
+        staff_name: `${p.first_name} ${p.last_name}`,
+      };
+    });
+
+    const garagesLite = garages.map((p) => {
+      return {
+        garage_id: p.garage_id,
+        garage_name: p.garage_name,
+      };
+    });
+
+    const vansLite = vans.map((p) => {
+      return {
+        van_id: p.van_id,
+        van_name: p.van_name,
+      };
+    });
+
+    const stakeholdersLite = stakeholders.map((p) => {
+      return {
+        stakeholder_id: p.stakeholder_id,
+        stakeholder_name: p.stakeholder_name,
+      };
+    });
+    res.json({
+      customers: customersLite,
+      products: productsLite,
+      stores: storesLite,
+      staffs: staffsLite,
+      garages: garagesLite,
+      vans: vansLite,
+      stakeholders: stakeholdersLite,
+    });
+  } catch (err) {
+    res.error({ error: err.message });
   }
 });
 
@@ -130,9 +203,7 @@ app.post("/upload", fileUpload.single("image"), function (req, res, next) {
   };
 
   async function upload(req) {
-    let result = await streamUpload(req);
-    console.log(result);
-    res.json(result);
+    res.json(await streamUpload(req));
   }
 
   upload(req);
@@ -223,6 +294,51 @@ app.delete("/customers/:id", async (req, res) => {
   try {
     const { id } = req.params;
     res.json(await customerService.deleteCustomer(id));
+  } catch (err) {
+    res.json({ error: err.message });
+  }
+});
+//#endregion
+
+//#region CUSTOMERS
+app.get("/stakeholders", async (req, res) => {
+  try {
+    res.json(await stakeholderService.getStakeholders());
+  } catch (err) {
+    res.json({ error: err.message });
+  }
+});
+
+app.get("/stakeholders/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    res.json(await stakeholderService.getStakeholder(id));
+  } catch (err) {
+    res.json({ error: err.message });
+  }
+});
+
+app.post("/stakeholders", async (req, res) => {
+  try {
+    res.json(await stakeholderService.createStakeholder(req.body));
+  } catch (err) {
+    res.json({ error: err.message });
+  }
+});
+
+app.put("/stakeholders/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    res.json(await stakeholderService.updateStakeholder(id, req.body));
+  } catch (err) {
+    res.json({ error: err.message });
+  }
+});
+
+app.delete("/stakeholders/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    res.json(await stakeholderService.deleteStakeholder(id));
   } catch (err) {
     res.json({ error: err.message });
   }

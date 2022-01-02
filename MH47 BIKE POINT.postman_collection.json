@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "a8e40e9f-a4f9-4696-b2bb-f907c0ca22ae",
+		"_postman_id": "25c750d6-2512-4953-a7f1-44a1910eb7c0",
 		"name": "MH47 BIKE POINT",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -220,6 +220,117 @@
 							"path": [
 								"customers",
 								"88e0989f-b0a3-447b-8e80-e4339ded68a1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "STAKEHOLDER",
+			"item": [
+				{
+					"name": "Stakeholders",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/stakeholders",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"stakeholders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Stakeholder",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/stakeholders/88e0989f-b0a3-447b-8e80-e4339ded68a1",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"stakeholders",
+								"88e0989f-b0a3-447b-8e80-e4339ded68a1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Stakeholder",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"stakeholder_name\":\"Sunny\",\r\n  \"type\": \"RTO Agent\",\r\n  \"phone\": \"9819349383\",\r\n  \"email\":\"sunny@gmail.com\",\r\n  \"address_line1\":\"Tisgaon\",\r\n  \"address_line2\":\"Kalyan\",\r\n  \"city\": \"Thane\",\r\n  \"state\": \"Maharashtra\",\r\n  \"zip_code\": \"421306\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_url}}/stakeholders",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"stakeholders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Stakeholder",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"stakeholder_name\":\"Sunny\",\r\n  \"type\": \"RTO Agent\",\r\n  \"phone\": \"9819349383\",\r\n  \"email\":\"sunny@gmail.com\",\r\n  \"address_line1\":\"Borivali\",\r\n  \"address_line2\":\"Borivali\",\r\n  \"city\": \"Mumbai\",\r\n  \"state\": \"Maharashtra\",\r\n  \"zip_code\": \"400789\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_url}}/stakeholders/0d092027-af61-42b9-87e7-f74bfa9a03ff",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"stakeholders",
+								"0d092027-af61-42b9-87e7-f74bfa9a03ff"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Stakeholder",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{api_url}}/stakeholders/0cf127f3-20ef-4908-b2ad-2a8712be4894",
+							"host": [
+								"{{api_url}}"
+							],
+							"path": [
+								"stakeholders",
+								"0cf127f3-20ef-4908-b2ad-2a8712be4894"
 							]
 						}
 					},
@@ -770,13 +881,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{api_url}}/staffs/defaults",
+					"raw": "{{api_url}}/defaults/staffs",
 					"host": [
 						"{{api_url}}"
 					],
 					"path": [
-						"staffs",
-						"defaults"
+						"defaults",
+						"staffs"
 					]
 				}
 			},
@@ -788,13 +899,31 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{api_url}}/products/defaults",
+					"raw": "{{api_url}}/defaults/products",
 					"host": [
 						"{{api_url}}"
 					],
 					"path": [
-						"products",
-						"defaults"
+						"defaults",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Transaction Defaults",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{api_url}}/defaults/transactions",
+					"host": [
+						"{{api_url}}"
+					],
+					"path": [
+						"defaults",
+						"transactions"
 					]
 				}
 			},
