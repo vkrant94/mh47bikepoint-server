@@ -103,13 +103,15 @@ app.get("/defaults/staffs", async (req, res) => {
 app.get("/defaults/products", async (req, res) => {
   try {
     const { bikeCategories, brands } = await defaultsService.getDefaults();
-    const customers = (await customerService.getCustomers()).map((s) => {
-      return {
-        customer_id: s.customer_id,
-        customer_name: `${s.first_name} ${s.last_name}`,
-      };
-    });
-    res.json({ bikeCategories, brands, customers });
+    const dealers = (await stakeholderService.getStakeholders())
+      .filter((s) => s.type === "Dealer")
+      .map((s) => {
+        return {
+          dealer_id: s.stakeholder_id,
+          dealer_name: s.stakeholder_name,
+        };
+      });
+    res.json({ bikeCategories, brands, dealers });
   } catch (err) {
     res.json({ error: err.message });
   }
@@ -300,7 +302,7 @@ app.delete("/customers/:id", async (req, res) => {
 });
 //#endregion
 
-//#region CUSTOMERS
+//#region STAKEHOLDERS
 app.get("/stakeholders", async (req, res) => {
   try {
     res.json(await stakeholderService.getStakeholders());
@@ -500,7 +502,7 @@ app.delete("/staffs/:id", async (req, res) => {
 app.get("/products", async (req, res) => {
   try {
     const { bikeCategories, brands } = await defaultsService.getDefaults();
-    const customers = await customerService.getCustomers();
+    const stakeHolders = await stakeholderService.getStakeholders();
     const products = await productService.getProducts();
 
     res.json(
@@ -509,15 +511,15 @@ app.get("/products", async (req, res) => {
           (b) => b.category_id === p.category_id
         );
         const brand = brands.find((b) => b.brand_id === p.brand_id);
-        const customer = customers.find((c) => p.owner_id === c.customer_id);
+        const stakeHolder = stakeHolders.find(
+          (c) => p.stakeholder_id === c.stakeholder_id
+        );
 
         return {
           ...p,
           brand_name: brand ? brand.brand_name : "",
           category_name: category ? category.category_name : "",
-          owner_name: customer
-            ? `${customer.first_name} ${customer.last_name}`
-            : "",
+          stakeholder_name: stakeHolder ? stakeHolder.stakeholder_name : "",
         };
       })
     );

@@ -133,4 +133,15 @@ Dashboard: {
     ]
   }
 }
+
+ALTER TABLE production.products   
+DROP COLUMN list_price CASCADE;  
+
+alter table sales.stakeholders alter column email drop not null;
+
+ALTER TABLE sales.stakeholders ALTER COLUMN phone SET NOT NULL;
+
+
+ALTER TABLE production.products ADD COLUMN stakeholder_id UUID;
+ALTER TABLE production.products ADD FOREIGN KEY (stakeholder_id) REFERENCES sales.stakeholders (stakeholder_id) ON DELETE CASCADE ON UPDATE CASCADE;
 */
