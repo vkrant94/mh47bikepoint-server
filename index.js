@@ -30,7 +30,21 @@ app.use(cors()); // CORS
 //#region TRANSACTIONS
 app.get("/transactions", async (req, res) => {
   try {
-    res.json(await transactionService.getTransactions());
+    const products = await productService.getProducts();
+    const staffs = await staffService.getStaffs();
+    const transactions = await transactionService.getTransactions();
+
+    res.json(
+      transactions.map((t) => {
+        const product = products.find((p) => p.product_id === t.product_id);
+        const staff = staffs.find((s) => s.staff_id === t.staff_id);
+        return {
+          ...t,
+          product_name: product ? product.product_name : "",
+          staff_name: staff ? `${staff.first_name} ${staff.last_name}` : "",
+        };
+      })
+    );
   } catch (err) {
     res.json({ error: err.message });
   }
