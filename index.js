@@ -20,12 +20,23 @@ const storeService = require("./services/storeService");
 const garageService = require("./services/garageService");
 const staffService = require("./services/staffService");
 const productService = require("./services/productService");
+const dashboardService = require("./services/dashboardService");
 const portNumber = 3000;
 
 app.use(express.json()); // req.body
 app.use(cors()); // CORS
 
 // ROUTES
+
+//#region DASHBOARD
+app.get("/dashboard", async (req, res) => {
+  try {
+    res.json(await dashboardService.getDashboard());
+  } catch (err) {
+    res.json({ error: err.message });
+  }
+});
+//#endregion
 
 //#region TRANSACTIONS
 app.get("/transactions", async (req, res) => {
