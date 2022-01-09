@@ -24,6 +24,9 @@ const getDashboard = async (year, month) => {
         {
           label: "Monthly Sales",
           data: graphData,
+          fill: true,
+          borderColor: "#42A5F5",
+          tension: 0.4,
         },
       ],
     },

@@ -34,7 +34,8 @@ app.get("/dashboard", async (req, res) => {
     const { year, month } = req.query;
     res.json(await dashboardService.getDashboard(year, month));
   } catch (err) {
-    res.json({ error: err.message });
+    res.status(500);
+    res.send({ error: err.message });
   }
 });
 //#endregion
@@ -58,6 +59,7 @@ app.get("/transactions", async (req, res) => {
       })
     );
   } catch (err) {
+    res.status(500);
     res.json({ error: err.message });
   }
 });
@@ -67,6 +69,7 @@ app.get("/transactions/:id", async (req, res) => {
     const { id } = req.params;
     res.json(await transactionService.getTransaction(id));
   } catch (err) {
+    res.status(500);
     res.json({ error: err.message });
   }
 });
@@ -75,6 +78,7 @@ app.post("/transactions", async (req, res) => {
   try {
     res.json(await transactionService.createTransaction(req.body));
   } catch (err) {
+    res.status(500);
     res.json({ error: err.message });
   }
 });
@@ -84,6 +88,7 @@ app.put("/transactions/:id", async (req, res) => {
     const { id } = req.params;
     res.json(await transactionService.updateTransaction(id, req.body));
   } catch (err) {
+    res.status(500);
     res.json({ error: err.message });
   }
 });
@@ -93,6 +98,7 @@ app.delete("/transactions/:id", async (req, res) => {
     const { id } = req.params;
     res.json(await transactionService.deleteTransaction(id));
   } catch (err) {
+    res.status(500);
     res.json({ error: err.message });
   }
 });
