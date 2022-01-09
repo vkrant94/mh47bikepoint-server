@@ -31,7 +31,8 @@ app.use(cors()); // CORS
 //#region DASHBOARD
 app.get("/dashboard", async (req, res) => {
   try {
-    res.json(await dashboardService.getDashboard());
+    const { year, month } = req.query;
+    res.json(await dashboardService.getDashboard(year, month));
   } catch (err) {
     res.json({ error: err.message });
   }

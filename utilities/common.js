@@ -20,4 +20,7 @@ function getParameters(requestBody) {
   return parameters.join(",");
 }
 
-module.exports = { extractInsertQueryTokens, extractUpdateQueryTokens };
+module.exports = {
+  extractInsertQueryTokens,
+  extractUpdateQueryTokens,
+};
