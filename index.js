@@ -29,10 +29,19 @@ app.use(cors()); // CORS
 // ROUTES
 
 //#region DASHBOARD
-app.get("/dashboard", async (req, res) => {
+app.get("/dashboard/salesoverview", async (req, res) => {
   try {
     const { year, month } = req.query;
-    res.json(await dashboardService.getDashboard(year, month));
+    res.json(await dashboardService.getSalesOverview(year, month));
+  } catch (err) {
+    res.status(500);
+    res.send({ error: err.message });
+  }
+});
+
+app.get("/dashboard/visitors", async (req, res) => {
+  try {
+    res.json(await dashboardService.getVisitorsOverview());
   } catch (err) {
     res.status(500);
     res.send({ error: err.message });

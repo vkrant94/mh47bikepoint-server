@@ -1,7 +1,7 @@
 const transactionService = require("../services/transactionService");
 const BIKE_PURCHASE = "Bike Purchase";
 
-const getDashboard = async (year, month) => {
+const getSalesOverview = async (year, month) => {
   const transactions = await transactionService.getTransactionByYear(year);
 
   let bikePurchaseTransactions = transactions
@@ -22,7 +22,7 @@ const getDashboard = async (year, month) => {
       labels: graphLabels,
       datasets: [
         {
-          label: "Monthly Sales",
+          label: "Sales Overview",
           data: graphData,
           fill: true,
           borderColor: "#42A5F5",
@@ -33,6 +33,22 @@ const getDashboard = async (year, month) => {
   };
 };
 
+const getVisitorsOverview = async () => {
+  return {
+    visitors: {
+      labels: ["With Gear", "Without Gear", "E-Bikes"],
+      datasets: [
+        {
+          data: [300, 50, 100],
+          backgroundColor: ["#42A5F5", "#66BB6A", "#FFA726"],
+          hoverBackgroundColor: ["#64B5F6", "#81C784", "#FFB74D"],
+        },
+      ],
+    },
+  };
+};
+
 module.exports = {
-  getDashboard,
+  getSalesOverview,
+  getVisitorsOverview,
 };
