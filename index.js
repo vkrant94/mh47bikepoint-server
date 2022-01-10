@@ -41,7 +41,8 @@ app.get("/dashboard/salesoverview", async (req, res) => {
 
 app.get("/dashboard/visitors", async (req, res) => {
   try {
-    res.json(await dashboardService.getVisitorsOverview());
+    const { year, month } = req.query;
+    res.json(await dashboardService.getVisitorsOverview(year, month));
   } catch (err) {
     res.status(500);
     res.send({ error: err.message });

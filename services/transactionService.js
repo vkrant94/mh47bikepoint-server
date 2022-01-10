@@ -63,14 +63,10 @@ const getTransactionByYear = async (year) => {
   return transactions.rows;
 };
 
-const groupTransactionsByMonths = (transactions, month) => {
-  transactions = transactions.filter(
-    (t) => INDEX_TO_MONTH[t.end_date.getMonth()] === month
-  );
-
+const groupByProtype = (items, callback) => {
   const groupByDays = {};
-  transactions.forEach((t) => {
-    const date = t.end_date.getDate();
+  items.forEach((t) => {
+    const date = callback(t);
     if (groupByDays.hasOwnProperty(date)) {
       const collection = groupByDays[date];
       collection.push(t);
@@ -79,22 +75,21 @@ const groupTransactionsByMonths = (transactions, month) => {
     }
   });
 
+  return groupByDays;
+};
+
+const groupSalesTransactionsByMonths = (transactions, month) => {
+  const groupByDays = groupByProtype(transactions, (t) => t.end_date.getDate());
+
   const graphLabels = Object.keys(groupByDays).sort((a, b) => a - b);
   const graphData = graphLabels.map((si) => groupByDays[si].length);
   return { graphLabels, graphData };
 };
 
-const groupTransactionsByYears = (transactions) => {
-  const groupByMonths = {};
-  transactions.forEach((t) => {
-    const date = t.end_date.getMonth();
-    if (groupByMonths.hasOwnProperty(date)) {
-      const collection = groupByMonths[date];
-      collection.push(t);
-    } else {
-      groupByMonths[date] = [t];
-    }
-  });
+const groupSalesTransactionsByYears = (transactions) => {
+  const groupByMonths = groupByProtype(transactions, (t) =>
+    t.end_date.getMonth()
+  );
 
   const sortedDateIndexes = Object.keys(groupByMonths).sort((a, b) => a - b);
   const graphData = sortedDateIndexes.map((si) => groupByMonths[si].length);
@@ -109,6 +104,6 @@ module.exports = {
   createTransaction,
   updateTransaction,
   deleteTransaction,
-  groupTransactionsByYears,
-  groupTransactionsByMonths,
+  groupSalesTransactionsByYears,
+  groupSalesTransactionsByMonths,
 };

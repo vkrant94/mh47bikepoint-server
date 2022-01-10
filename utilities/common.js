@@ -1,3 +1,5 @@
+const { INDEX_TO_MONTH } = require("../services/constants");
+
 const extractInsertQueryTokens = (requestBody) => {
   const columnNames = Object.keys(requestBody).join(",");
   const values = Object.values(requestBody);
@@ -20,7 +22,12 @@ function getParameters(requestBody) {
   return parameters.join(",");
 }
 
+function filterItemsByMonth(items, month, dateKey) {
+  return items.filter((t) => INDEX_TO_MONTH[t[dateKey].getMonth()] === month);
+}
+
 module.exports = {
   extractInsertQueryTokens,
   extractUpdateQueryTokens,
+  filterItemsByMonth,
 };

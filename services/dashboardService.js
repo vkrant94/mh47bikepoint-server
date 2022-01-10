@@ -1,21 +1,36 @@
 const transactionService = require("../services/transactionService");
+const commonService = require("../utilities/common");
 const BIKE_PURCHASE = "Bike Purchase";
 
-const getSalesOverview = async (year, month) => {
+const getBikePurchaseTransactions = async (year) => {
   const transactions = await transactionService.getTransactionByYear(year);
 
-  let bikePurchaseTransactions = transactions
+  return transactions
     .filter((t) => t.transaction_type === BIKE_PURCHASE)
     .map((t) => {
       return { ...t, end_date: new Date(t.end_date) };
     });
+};
+
+const getSalesOverview = async (year, month) => {
+  let bikePurchaseTransactions = await getBikePurchaseTransactions(year);
+
+  if (month) {
+    bikePurchaseTransactions = commonService.filterItemsByMonth(
+      bikePurchaseTransactions,
+      month,
+      "end_date"
+    );
+  }
 
   const { graphLabels, graphData } = month
-    ? transactionService.groupTransactionsByMonths(
+    ? transactionService.groupSalesTransactionsByMonths(
         bikePurchaseTransactions,
         month
       )
-    : transactionService.groupTransactionsByYears(bikePurchaseTransactions);
+    : transactionService.groupSalesTransactionsByYears(
+        bikePurchaseTransactions
+      );
 
   return {
     monthlySales: {
@@ -33,7 +48,17 @@ const getSalesOverview = async (year, month) => {
   };
 };
 
-const getVisitorsOverview = async () => {
+const getVisitorsOverview = async (year, month) => {
+  let bikePurchaseTransactions = await getBikePurchaseTransactions(year);
+
+  if (month) {
+    bikePurchaseTransactions = commonService.filterItemsByMonth(
+      bikePurchaseTransactions,
+      month,
+      "end_date"
+    );
+  }
+
   return {
     visitors: {
       labels: ["With Gear", "Without Gear", "E-Bikes"],
