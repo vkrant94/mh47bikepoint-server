@@ -97,6 +97,17 @@ const groupSalesTransactionsByYears = (transactions) => {
   return { graphLabels, graphData };
 };
 
+const groupVisitorsByBikeCategory = (transactions) => {
+  const groupByCategory = groupByProtype(
+    transactions,
+    (t) => t.product_category
+  );
+
+  const graphLabels = Object.keys(groupByCategory);
+  const graphData = graphLabels.map((gl) => groupByCategory[gl].length);
+  return { graphLabels, graphData };
+};
+
 module.exports = {
   getTransactions,
   getTransaction,
@@ -106,4 +117,5 @@ module.exports = {
   deleteTransaction,
   groupSalesTransactionsByYears,
   groupSalesTransactionsByMonths,
+  groupVisitorsByBikeCategory,
 };

@@ -1,5 +1,7 @@
 const transactionService = require("../services/transactionService");
+const productService = require("../services/productService");
 const commonService = require("../utilities/common");
+const pool = require("../database/db");
 const BIKE_PURCHASE = "Bike Purchase";
 
 const getBikePurchaseTransactions = async (year) => {
@@ -50,6 +52,10 @@ const getSalesOverview = async (year, month) => {
 
 const getVisitorsOverview = async (year, month) => {
   let bikePurchaseTransactions = await getBikePurchaseTransactions(year);
+  let products = await productService.getProducts();
+  const bikeCategories = await pool.query(
+    "SELECT * FROM production.bike_categories"
+  );
 
   if (month) {
     bikePurchaseTransactions = commonService.filterItemsByMonth(
@@ -59,12 +65,27 @@ const getVisitorsOverview = async (year, month) => {
     );
   }
 
+  bikePurchaseTransactions = bikePurchaseTransactions.map((t) => {
+    const product = products.find((p) => p.product_id == t.product_id);
+    return {
+      ...t,
+      product_category: product
+        ? bikeCategories.rows.find(
+            (bc) => bc.category_id === product.category_id
+          ).category_name
+        : "",
+    };
+  });
+
+  const { graphLabels, graphData } =
+    transactionService.groupVisitorsByBikeCategory(bikePurchaseTransactions);
+
   return {
     visitors: {
-      labels: ["With Gear", "Without Gear", "E-Bikes"],
+      labels: graphLabels,
       datasets: [
         {
-          data: [300, 50, 100],
+          data: graphData,
           backgroundColor: ["#42A5F5", "#66BB6A", "#FFA726"],
           hoverBackgroundColor: ["#64B5F6", "#81C784", "#FFB74D"],
         },
