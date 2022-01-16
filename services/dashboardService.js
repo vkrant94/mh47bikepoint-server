@@ -3,18 +3,15 @@ const productService = require("../services/productService");
 const commonService = require("../utilities/common");
 const pool = require("../database/db");
 const BIKE_PURCHASE = "Bike Purchase";
+const PERSONAL = "Personal";
 
 const getBikePurchaseTransactions = async (year) => {
   const transactions = await transactionService.getTransactionByYear(year);
 
-  return transactions
-    .filter((t) => t.transaction_type === BIKE_PURCHASE)
-    .map((t) => {
-      return { ...t, end_date: new Date(t.end_date) };
-    });
+  return transactions.filter((t) => t.transaction_type === BIKE_PURCHASE);
 };
 
-const getSalesOverview = async (year, month) => {
+const getSalesOverview = async (year, month, filterKey) => {
   let bikePurchaseTransactions = await getBikePurchaseTransactions(year);
 
   if (month) {
@@ -26,12 +23,13 @@ const getSalesOverview = async (year, month) => {
   }
 
   const { graphLabels, graphData } = month
-    ? transactionService.groupSalesTransactionsByMonths(
+    ? transactionService.getTransactionsGraphDataByMonths(
         bikePurchaseTransactions,
-        month
+        filterKey
       )
-    : transactionService.groupSalesTransactionsByYears(
-        bikePurchaseTransactions
+    : transactionService.getTransactionsGraphDataByYears(
+        bikePurchaseTransactions,
+        filterKey
       );
 
   return {
@@ -94,7 +92,46 @@ const getVisitorsOverview = async (year, month) => {
   };
 };
 
+const getPersonalExpenseOverview = async (year, month, filterKey) => {
+  const transactions = await transactionService.getTransactionByYear(year);
+  let personalTransactions = transactions.filter(
+    (t) => t.transaction_type === PERSONAL
+  );
+
+  if (month) {
+    personalTransactions = commonService.filterItemsByMonth(
+      personalTransactions,
+      month,
+      "end_date"
+    );
+  }
+
+  const { graphLabels, graphData } = month
+    ? transactionService.getTransactionsGraphDataByMonths(
+        personalTransactions,
+        filterKey
+      )
+    : transactionService.getTransactionsGraphDataByYears(
+        personalTransactions,
+        filterKey
+      );
+
+  return {
+    labels: graphLabels,
+    datasets: [
+      {
+        label: "Personal Expenditure",
+        data: graphData,
+        fill: true,
+        borderColor: "#42A5F5",
+        tension: 0.4,
+      },
+    ],
+  };
+};
+
 module.exports = {
   getSalesOverview,
   getVisitorsOverview,
+  getPersonalExpenseOverview,
 };

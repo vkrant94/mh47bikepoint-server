@@ -31,8 +31,8 @@ app.use(cors()); // CORS
 //#region DASHBOARD
 app.get("/dashboard/salesoverview", async (req, res) => {
   try {
-    const { year, month } = req.query;
-    res.json(await dashboardService.getSalesOverview(year, month));
+    const { year, month, filter } = req.query;
+    res.json(await dashboardService.getSalesOverview(year, month, filter));
   } catch (err) {
     res.status(500);
     res.send({ error: err.message });
@@ -43,6 +43,18 @@ app.get("/dashboard/visitors", async (req, res) => {
   try {
     const { year, month } = req.query;
     res.json(await dashboardService.getVisitorsOverview(year, month));
+  } catch (err) {
+    res.status(500);
+    res.send({ error: err.message });
+  }
+});
+
+app.get("/dashboard/personalExpenditure", async (req, res) => {
+  try {
+    const { year, month, filter } = req.query;
+    res.json(
+      await dashboardService.getPersonalExpenseOverview(year, month, filter)
+    );
   } catch (err) {
     res.status(500);
     res.send({ error: err.message });

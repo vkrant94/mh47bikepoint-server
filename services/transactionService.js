@@ -1,6 +1,7 @@
 const pool = require("../database/db");
 const common = require("../utilities/common");
 const { INDEX_TO_MONTH } = require("../services/constants");
+const _ = require("lodash");
 
 const createTransaction = async (body) => {
   const { columnNames, values, parameters } =
@@ -60,47 +61,44 @@ const getTransactionByYear = async (year) => {
 
   if (transactions.rowCount === 0) throw new Error("Transaction not found");
 
-  return transactions.rows;
-};
-
-const groupByProtype = (items, callback) => {
-  const groupByDays = {};
-  items.forEach((t) => {
-    const date = callback(t);
-    if (groupByDays.hasOwnProperty(date)) {
-      const collection = groupByDays[date];
-      collection.push(t);
-    } else {
-      groupByDays[date] = [t];
-    }
+  return transactions.rows.map((r) => {
+    return {
+      ...r,
+      end_date: new Date(r.end_date),
+      start_date: new Date(r.start_date),
+      trans_amount: parseFloat(r.trans_amount),
+      paid_amount: parseFloat(r.paid_amount),
+    };
   });
-
-  return groupByDays;
 };
 
-const groupSalesTransactionsByMonths = (transactions, month) => {
-  const groupByDays = groupByProtype(transactions, (t) => t.end_date.getDate());
+const getTransactionsGraphDataByMonths = (transactions, filterKey) => {
+  const groupByDays = common.groupItemsByMonth(transactions);
 
   const graphLabels = Object.keys(groupByDays).sort((a, b) => a - b);
-  const graphData = graphLabels.map((si) => groupByDays[si].length);
+  const graphData = graphLabels.map((si) =>
+    !filterKey ? groupByDays[si].length : _.sumBy(groupByDays[si], filterKey)
+  );
   return { graphLabels, graphData };
 };
 
-const groupSalesTransactionsByYears = (transactions) => {
-  const groupByMonths = groupByProtype(transactions, (t) =>
-    t.end_date.getMonth()
-  );
+const getTransactionsGraphDataByYears = (transactions, filterKey) => {
+  const groupByMonths = common.groupItemsByYear(transactions);
 
   const sortedDateIndexes = Object.keys(groupByMonths).sort((a, b) => a - b);
-  const graphData = sortedDateIndexes.map((si) => groupByMonths[si].length);
+  const graphData = sortedDateIndexes.map((si) =>
+    !filterKey
+      ? groupByMonths[si].length
+      : _.sumBy(groupByMonths[si], filterKey)
+  );
   const graphLabels = sortedDateIndexes.map((si) => INDEX_TO_MONTH[si]);
   return { graphLabels, graphData };
 };
 
 const groupVisitorsByBikeCategory = (transactions) => {
-  const groupByCategory = groupByProtype(
+  const groupByCategory = common.groupItemByKey(
     transactions,
-    (t) => t.product_category
+    "product_category"
   );
 
   const graphLabels = Object.keys(groupByCategory);
@@ -115,7 +113,7 @@ module.exports = {
   createTransaction,
   updateTransaction,
   deleteTransaction,
-  groupSalesTransactionsByYears,
-  groupSalesTransactionsByMonths,
+  getTransactionsGraphDataByYears,
+  getTransactionsGraphDataByMonths,
   groupVisitorsByBikeCategory,
 };

@@ -26,8 +26,38 @@ function filterItemsByMonth(items, month, dateKey) {
   return items.filter((t) => INDEX_TO_MONTH[t[dateKey].getMonth()] === month);
 }
 
+function groupByProtype(items, callback) {
+  const groupByDays = {};
+  items.forEach((t) => {
+    const key = callback(t);
+    if (groupByDays.hasOwnProperty(key)) {
+      const collection = groupByDays[key];
+      collection.push(t);
+    } else {
+      groupByDays[key] = [t];
+    }
+  });
+
+  return groupByDays;
+}
+
+function groupItemsByMonth(items) {
+  return groupByProtype(items, (t) => t.end_date.getDate());
+}
+
+function groupItemsByYear(items) {
+  return groupByProtype(items, (t) => t.end_date.getMonth());
+}
+
+function groupItemByKey(items, key) {
+  return groupByProtype(items, (t) => t[key]);
+}
+
 module.exports = {
   extractInsertQueryTokens,
   extractUpdateQueryTokens,
   filterItemsByMonth,
+  groupItemsByMonth,
+  groupItemsByYear,
+  groupItemByKey,
 };
